@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LearningPlaywrightCSharp.Pages
@@ -15,9 +16,23 @@ namespace LearningPlaywrightCSharp.Pages
         private ILocator _txtUserName => _page.Locator("#UserName");
         private ILocator _txtPassword => _page.Locator("#Password");
         private ILocator _btnLogin => _page.Locator("text=Log in");
-        private ILocator _lnkEmployeeDetaild => _page.Locator("text=Employee Details");
+        private ILocator _lnkEmployeeList => _page.Locator("text=Employee List");
 
-        public async Task ClickLogin() => await _lnkLogin.ClickAsync();
+        public async Task ClickLogin() // better use PageWaitForURLOptions
+        {
+            await _page.RunAndWaitForNavigationAsync(async () =>
+            {
+                await _lnkLogin.ClickAsync();
+            }, new PageRunAndWaitForNavigationOptions
+            {
+                UrlRegex = new Regex(".*/Login")
+            });
+        }
+
+        public async Task ClickEmployeeList()
+        {
+             await _lnkEmployeeList.ClickAsync();
+        }
 
         public async Task Login(string username, string password)
         {
@@ -26,7 +41,7 @@ namespace LearningPlaywrightCSharp.Pages
             await _btnLogin.ClickAsync();
         }
 
-        public async Task<bool> IsEmployeeDetailsExist() => await _lnkEmployeeDetaild.IsVisibleAsync();
+        public async Task<bool> IsEmployeeDetailsExist() => await _lnkEmployeeList.IsVisibleAsync();
     }
 
 }
