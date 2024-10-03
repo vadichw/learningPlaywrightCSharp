@@ -155,6 +155,5 @@ public class Tests
         Console.WriteLine($"Resource: {siteConditionsFooterName}");
         Console.WriteLine($"Actual text: {actualsiteConditionsFooterName}");
     }
-
 }
 
