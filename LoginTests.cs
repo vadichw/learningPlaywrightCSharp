@@ -145,7 +145,7 @@ public class Tests
 
         await page.GotoAsync("https://avto.pro/");
 
-        var actualsiteConditionsFooterName = await page.
+        string actualsiteConditionsFooterName = await page.
             Locator("body > footer > div:nth-child(3) > div > div > div > ul:nth-child(1) > li:nth-child(1) > a").InnerTextAsync();
 
         string siteConditionsFooterName = Resources.ResourceManager.GetString("page.footer.useTerms", null);
