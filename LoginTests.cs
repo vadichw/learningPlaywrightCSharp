@@ -148,11 +148,11 @@ public class Tests
         string actualsiteConditionsFooterName = await page.
             Locator("body > footer > div:nth-child(3) > div > div > div > ul:nth-child(1) > li:nth-child(1) > a").InnerTextAsync();
 
-        string siteConditionsFooterName = Resources.ResourceManager.GetString("page.footer.useTerms", null);
+        string expectedSiteConditionsFooterName = Resources.ResourceManager.GetString("page.footer.useTerms", null);
 
-        Assert.That(siteConditionsFooterName, Is.EqualTo(actualsiteConditionsFooterName));
+        Assert.That(expectedSiteConditionsFooterName, Is.EqualTo(actualsiteConditionsFooterName));
 
-        Console.WriteLine($"Resource: {siteConditionsFooterName}");
+        Console.WriteLine($"Resource: {expectedSiteConditionsFooterName}");
         Console.WriteLine($"Actual text: {actualsiteConditionsFooterName}");
     }
 }
